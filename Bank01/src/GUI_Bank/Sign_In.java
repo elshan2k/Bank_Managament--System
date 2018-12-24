@@ -100,7 +100,7 @@ public class Sign_In extends javax.swing.JFrame {
 
 
           
-        JOptionPane.showMessageDialog(null, Bank.ar.getSize());
+        
         if (Bank.ar.logInCheck(id, sPassword.getText()) ) {
             JOptionPane.showMessageDialog(null, "Success");
         } else {
