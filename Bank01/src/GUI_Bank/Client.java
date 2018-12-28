@@ -5,6 +5,8 @@
  */
 package GUI_Bank;
 
+import com.toedter.calendar.JDateChooser;
+
 /**
  *
  * @author HP
@@ -13,13 +15,17 @@ public class Client extends User{
     
     
     
+    public Client(String name, String surname, String email, int id, String password,String address, JDateChooser dot) {
+        super(name, surname, email, id, password, address, dot);
+    }
+    
+    public Client(String name, String surname, String email, int id, String password,String address) {
+        super(name, surname, email, id, password,address);
+    }
     public Client(String name, String surname, String email, int id, String password) {
         super(name, surname, email, id, password);
     }
-   
-    public Client() {
-    }
-
+  
    
     
     
