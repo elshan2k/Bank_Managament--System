@@ -6,14 +6,14 @@
 package GUI_Bank;
 
 import java.util.ArrayList;
-
+ 
 /**
  *
  * @author HP
  */
 public class UserArray {
-
     ArrayList<User> userlist = new ArrayList<>();
+    private int index;
 
     public UserArray() {
 
@@ -37,6 +37,40 @@ public class UserArray {
         return false;
 
     }
+    
+    public boolean idCheck(int id) {
+        for (int i = 0; i < userlist.size(); i++) {
+            if (userlist.get(i).id == id) {
+                return false;
+            }
+
+        }
+        return true;
+
+    }
+    
+    public void setIndex(int id){
+         for (int i = 0; i < userlist.size(); i++) {
+            if (userlist.get(i).id == id) {
+               index = i; 
+            }
+        }
+    }
+      public int getIndexByID(int id){
+         for (int i = 0; i < userlist.size(); i++) {
+            if (userlist.get(i).id == id) {
+               return i; 
+            }
+        }
+         return -1;
+    }
+    
+
+    public int getIndex() {
+        return this.index;
+    }
+        
+    
 
     public int getSize() {
         return this.userlist.size();

@@ -19,7 +19,7 @@ public class User {
     protected String email;
     protected int id;
     protected String password;
-    protected double balance;
+    protected double balance=0.0;
     protected String address;
     protected JDateChooser dot;
 
@@ -50,6 +50,14 @@ public class User {
 
     public User() {
         
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getBalance() {
+        return balance;
     }
     
 

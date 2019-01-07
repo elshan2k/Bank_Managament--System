@@ -5,23 +5,21 @@
  */
 package GUI_Bank;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
-public class Bank extends javax.swing.JFrame {
-    public static UserArray ar=new UserArray();
-   
-    
+public class DepWithGUI extends javax.swing.JFrame {
+
     /**
-     * Creates new form Bank
+     * Creates new form DepWithGUI
      */
-    public Bank(UserArray ar) {
+    public DepWithGUI() {
         initComponents();
-        this.ar=ar;
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,22 +30,26 @@ public class Bank extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        userwishmoney = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("WELCOME");
+        userwishmoney.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userwishmoneyActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Sign In");
+        jButton1.setText("Deposit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Sign Up");
+        jButton2.setText("Withdraw");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -59,23 +61,25 @@ public class Bank extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                    .addComponent(userwishmoney)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(userwishmoney, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(27, 27, 27)
-                .addComponent(jButton2)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,22 +87,38 @@ public class Bank extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       /* this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.setVisible(false);*/
-        Sign_Up signup = new Sign_Up();
-        signup.setVisible(true);
-       // this.setVisible(false);
+        int money = Integer.parseInt(userwishmoney.getText());
+        if (Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance()>=money) {
+            Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
+            int result = JOptionPane.showConfirmDialog(null,
+                "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.NO_OPTION) {
+            setVisible(false);
+
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "You do not have enough amount of money on your balance");
+            userwishmoney.setText("");
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Sign_In signin = new Sign_In();
-        
-        signin.setVisible(true);
-      //  this.setVisible(false);
-        
+        int money = Integer.parseInt(userwishmoney.getText());
+        Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() + money);
+        System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+        int result = JOptionPane.showConfirmDialog(null,
+                "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
+                
+        if (result == JOptionPane.NO_OPTION) {
+            setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void userwishmoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userwishmoneyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userwishmoneyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,24 +137,20 @@ public class Bank extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DepWithGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DepWithGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DepWithGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DepWithGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                User u1=new Client("admin","admin","aa",1000,"1");
-                User u2=new Client("Murad","Alizadeh","aa",2000,"2");
-                Bank.ar.addUser(u1);
-                Bank.ar.addUser(u2);
-                new Bank(ar).setVisible(true);
+                new DepWithGUI().setVisible(true);
             }
         });
     }
@@ -142,6 +158,6 @@ public class Bank extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField userwishmoney;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,8 +15,10 @@ public class Sign_In extends javax.swing.JFrame {
     /**
      * Creates new form Sign_In
      */
+    
     public Sign_In() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
     }
 
@@ -116,7 +118,12 @@ public class Sign_In extends javax.swing.JFrame {
           
         
         if (Bank.ar.logInCheck(id, sPassword.getText()) ) {
-            JOptionPane.showMessageDialog(null, "Success");
+            
+            Bank.ar.setIndex(id);
+            ClientGUI clientGUI= new ClientGUI(Bank.ar.getIndex());
+             setVisible(false);
+            clientGUI.setVisible(true);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Not Valid");
         } 
@@ -163,6 +170,7 @@ public class Sign_In extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Sign_In().setVisible(true);
             }
         });
