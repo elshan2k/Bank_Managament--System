@@ -107,12 +107,12 @@ public class SendMoney extends javax.swing.JFrame {
                 Bank.ar.userlist.get(recIndex).setBalance(Bank.ar.userlist.get(recIndex).balance + money);
                 System.out.println(Bank.ar.userlist.get(recIndex).getBalance());
                 System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
                 JOptionPane.showMessageDialog(null, "Proccess is Successful");
                 
             }else if (result == JOptionPane.NO_OPTION) {
                 recID.setText("");
                 recMoney.setText("");
-                setVisible(false);
             }
         } else if (Bank.ar.idCheck(id)) {
             JOptionPane.showMessageDialog(null, "Receiver's ID is not correct");

@@ -87,9 +87,10 @@ public class DepWithGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int money = Integer.parseInt(userwishmoney.getText());
+        double money = Double.parseDouble(userwishmoney.getText());
         if (Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance()>=money) {
             Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
+            ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
             int result = JOptionPane.showConfirmDialog(null,
                 "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.NO_OPTION) {
@@ -105,14 +106,16 @@ public class DepWithGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int money = Integer.parseInt(userwishmoney.getText());
+        double money = Double.parseDouble(userwishmoney.getText());
         Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() + money);
         System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+        ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
         int result = JOptionPane.showConfirmDialog(null,
                 "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
                 
         if (result == JOptionPane.NO_OPTION) {
             setVisible(false);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

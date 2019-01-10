@@ -5,9 +5,7 @@
  */
 package GUI_Bank;
 
-
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -19,6 +17,7 @@ public class Sign_Up extends javax.swing.JFrame {
      * Creates new form Sign_Up
      */
     public int n; //random number for id
+
     public Sign_Up() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,6 +45,7 @@ public class Sign_Up extends javax.swing.JFrame {
         taddress = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,14 +80,17 @@ public class Sign_Up extends javax.swing.JFrame {
 
         jLabel6.setText("Date of birth:");
 
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,6 +109,12 @@ public class Sign_Up extends javax.swing.JFrame {
                     .addComponent(taddress, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(152, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +143,11 @@ public class Sign_Up extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(36, 36, 36))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,26 +159,24 @@ public class Sign_Up extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-            
-            if (tname.getText().isEmpty() ||tsurname.getText().isEmpty() || 
-                    temail.getText().isEmpty() || tpassword.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Fill");
-            } else {
-                
-                do{
+        if (tname.getText().isEmpty() || tsurname.getText().isEmpty()
+                || temail.getText().isEmpty() || tpassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill");
+        } else {
+
+            do {
                 n = (int) (Math.random() * 2000 + 7999);
-                }while(!Bank.ar.idCheck(n));
-                
-                User client = new Client(tname.getText(), tsurname.getText(),
-                        temail.getText(), n, tpassword.getText(), taddress.getText());
-                Bank.ar.addUser(client);
-                JOptionPane.showMessageDialog(null, Bank.ar.getUser(Bank.ar.getSize()-1).toString());
-                this.setVisible(false);
-                Bank bank = new Bank(Bank.ar);
-                bank.setVisible(false);
-                
-            }
-        
+            } while (!Bank.ar.idCheck(n));
+
+            User client = new Client(tname.getText(), tsurname.getText(),
+                    temail.getText(), n, tpassword.getText(), taddress.getText());
+            Bank.ar.addUser(client);
+            JOptionPane.showMessageDialog(null, Bank.ar.getUser(Bank.ar.getSize() - 1).toString());
+            this.setVisible(false);
+            Bank bank = new Bank(Bank.ar);
+            bank.setVisible(false);
+
+        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -175,6 +184,12 @@ public class Sign_Up extends javax.swing.JFrame {
     private void tnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tnameActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here
+        setVisible(false);
+        new Bank(Bank.ar).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,6 +228,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

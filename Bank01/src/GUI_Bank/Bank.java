@@ -86,6 +86,7 @@ public class Bank extends javax.swing.JFrame {
        /* this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setVisible(false);*/
         Sign_Up signup = new Sign_Up();
+        setVisible(false);
         signup.setVisible(true);
        // this.setVisible(false);
         
@@ -94,6 +95,7 @@ public class Bank extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Sign_In signin = new Sign_In();
+        setVisible(false);
         
         signin.setVisible(true);
       //  this.setVisible(false);
@@ -132,8 +134,10 @@ public class Bank extends javax.swing.JFrame {
             public void run() {
                 User u1=new Client("admin","admin","aa",1000,"1");
                 User u2=new Client("Murad","Alizadeh","aa",2000,"2");
+                User u3=new Client("Elvin","Ziyali","aa",3000,"3");
                 Bank.ar.addUser(u1);
                 Bank.ar.addUser(u2);
+                Bank.ar.addUser(u3);
                 new Bank(ar).setVisible(true);
             }
         });
