@@ -6,6 +6,10 @@
 package GUI_Bank;
 
 import com.toedter.calendar.JDateChooser;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -21,7 +25,8 @@ public class User {
     protected String password;
     protected double balance=0.0;
     protected String address;
-    protected JDateChooser dot;
+    protected Date dot;
+    protected ArrayList<String> historyList = new ArrayList();
 
     public User(String name, String surname, String email, int id, String password) {
         this.email=email;
@@ -38,7 +43,7 @@ public class User {
         this.address = address;
         setPassword(password);
     }
-     public User(String name, String surname, String email, int id, String password,String address,JDateChooser dot) {
+     public User(String name, String surname, String email, int id, String password,String address,Date dot) {
         this.email=email;
         this.name = name;
         this.surname = surname;  
@@ -89,6 +94,14 @@ public class User {
         return id;
     }
 
+    public Date getDot() {
+        return dot;
+    }
+
+    public void setDot(Date dot) {
+        this.dot = dot;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -116,6 +129,28 @@ public class User {
         return "User{" + "name=" + name + ", surname=" + surname + ", email=" + email + ", id=" + id + ", password=" + password + ", balance=" + balance + ", address=" + address + '}';
     }
     
+     public void addTransaction(double balance, double change, String tType, int id) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date =new Date();
+        String currentDate = dateFormat.format(date);
+        if (id == -1) {
+            String hist= "$" + change +" "+tType + " your account, balance: $"+balance +". "+currentDate;
+            historyList.add(hist);
+        }else{
+            String hist= "$"+change+" Transfered to "+id+", balance: $"+balance+". "+currentDate;
+            historyList.add(hist);
+        }
+        
+    }
+     
+     public void getTransaction(double balance, double change, String tType, int id){
+          DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date =new Date();
+        String currentDate = dateFormat.format(date);
+        String hist= "$"+change+" to your account from "+id+", balance: $"+balance+". "+currentDate;
+        historyList.add(hist);
+     }
+   
 
    
  

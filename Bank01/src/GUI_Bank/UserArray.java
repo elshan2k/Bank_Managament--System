@@ -5,15 +5,19 @@
  */
 package GUI_Bank;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
  
 /**
  *
  * @author HP
  */
 public class UserArray {
-    ArrayList<User> userlist = new ArrayList<>();
+    public static ArrayList<User> userlist = new ArrayList<>();
     private int index;
+   
 
     public UserArray() {
 
@@ -80,5 +84,7 @@ public class UserArray {
     public String toString() {
         return "UserArray{" + "userlist=" + userlist + '}';
     }
+    
+
 
 }

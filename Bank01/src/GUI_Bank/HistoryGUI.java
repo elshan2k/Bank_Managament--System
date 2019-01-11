@@ -5,29 +5,26 @@
  */
 package GUI_Bank;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author HP
  */
-public class Bank extends javax.swing.JFrame {
-    public static UserArray ar=new UserArray();
-    public static ConfirmationArray car = new ConfirmationArray();
-   
-    
-    /**
-     * Creates new form Bank
-     */
-    public Bank(UserArray ar, ConfirmationArray car) {
-        initComponents();
-        this.ar=ar;
-        this.car=car;
-    }
-    
-    public Bank(UserArray ar){
-        initComponents();
-        this.ar=ar;
-    }
+public class HistoryGUI extends javax.swing.JFrame {
 
+    /**
+     * Creates new form HistoryGUI
+     */
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
+
+    public HistoryGUI() {
+        initComponents();
+        for (int i = 0; i < Bank.ar.getUser(Bank.ar.getIndex()).historyList.size(); i++) {
+            listModel.addElement(Bank.ar.getUser(Bank.ar.getIndex()).historyList.get(i));
+        }
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
 
 
     /**
@@ -39,25 +36,18 @@ public class Bank extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList(listModel);
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("WELCOME");
+        jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Sign In");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Sign Up");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -66,47 +56,28 @@ public class Bank extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(27, 27, 27)
-                .addComponent(jButton2)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-       /* this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.setVisible(false);*/
-        Sign_Up signup = new Sign_Up();
-        setVisible(false);
-        signup.setVisible(true);
-       // this.setVisible(false);
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Sign_In signin = new Sign_In();
         setVisible(false);
-        
-        signin.setVisible(true);
-      //  this.setVisible(false);
-        
+         new ClientGUI(Bank.ar.getIndex()).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -126,36 +97,27 @@ public class Bank extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                User u1=new Client("admin","admin","aa",1000,"1");
-                User u2=new Client("Murad","Alizadeh","aa",2000,"2");
-                User u3=new Client("Elvin","Ziyali","aa",3000,"3");
-                User u4=new Client("Elshan","Qadimov","aa",2001,"2");
-                
-                Bank.ar.addUser(u1);
-                Bank.ar.addUser(u2);
-                Bank.ar.addUser(u3);
-                Bank.ar.addUser(u4);
-                new Bank(ar,car).setVisible(true);
+                new HistoryGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

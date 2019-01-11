@@ -40,7 +40,7 @@
                   <Component id="temail" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
                   <Component id="tpassword" alignment="1" max="32767" attributes="0"/>
                   <Component id="taddress" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jDateChooser1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="tDot" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="152" max="32767" attributes="0"/>
           </Group>
@@ -84,7 +84,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tDot" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -151,7 +151,7 @@
         <Property name="text" type="java.lang.String" value="Date of birth:"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    <Component class="com.toedter.calendar.JDateChooser" name="tDot">
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>

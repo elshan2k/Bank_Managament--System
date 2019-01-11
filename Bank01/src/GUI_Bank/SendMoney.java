@@ -35,6 +35,8 @@ public class SendMoney extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         recMoney = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        labelSendBalance = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +51,16 @@ public class SendMoney extends javax.swing.JFrame {
             }
         });
 
+        labelSendBalance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelSendBalance.setText("Balance: "+ Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,21 +70,28 @@ public class SendMoney extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(recMoney, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recID, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(jButton1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(labelSendBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelSendBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(recID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -81,8 +100,10 @@ public class SendMoney extends javax.swing.JFrame {
                     .addComponent(recMoney, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         pack();
@@ -91,9 +112,10 @@ public class SendMoney extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(recID.getText());
-        int money = Integer.parseInt(recMoney.getText());
+        double money = Double.parseDouble(recMoney.getText());
+        int recIndex = Bank.ar.getIndexByID(id);
         if (!Bank.ar.idCheck(id) && Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() >= money) {
-            int recIndex = Bank.ar.getIndexByID(id);
+            
 
             int result = JOptionPane.showConfirmDialog(null,
                     "Do you really want to send "+"$"+money+" to " + 
@@ -108,6 +130,10 @@ public class SendMoney extends javax.swing.JFrame {
                 System.out.println(Bank.ar.userlist.get(recIndex).getBalance());
                 System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
                 ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money, "", id);
+                labelSendBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                Bank.ar.getUser(recIndex).getTransaction(Bank.ar.getUser(recIndex).getBalance(),money,"",Bank.ar.getUser(Bank.ar.getIndex()).getId());
+                
                 JOptionPane.showMessageDialog(null, "Proccess is Successful");
                 
             }else if (result == JOptionPane.NO_OPTION) {
@@ -122,6 +148,12 @@ public class SendMoney extends javax.swing.JFrame {
             recMoney.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+         new ClientGUI(Bank.ar.getIndex()).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,8 +192,10 @@ public class SendMoney extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel labelSendBalance;
     private javax.swing.JTextField recID;
     private javax.swing.JTextField recMoney;
     // End of variables declaration//GEN-END:variables

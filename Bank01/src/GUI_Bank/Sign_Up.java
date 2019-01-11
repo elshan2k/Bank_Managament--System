@@ -44,7 +44,7 @@ public class Sign_Up extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         taddress = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        tDot = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,7 +107,7 @@ public class Sign_Up extends javax.swing.JFrame {
                     .addComponent(temail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tpassword, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(taddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tDot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(152, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
@@ -142,7 +142,7 @@ public class Sign_Up extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tDot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -163,18 +163,16 @@ public class Sign_Up extends javax.swing.JFrame {
                 || temail.getText().isEmpty() || tpassword.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill");
         } else {
-
             do {
                 n = (int) (Math.random() * 2000 + 7999);
-            } while (!Bank.ar.idCheck(n));
-
+            } while (!Bank.ar.idCheck(n) && !Bank.car.idCheck(n));
             User client = new Client(tname.getText(), tsurname.getText(),
-                    temail.getText(), n, tpassword.getText(), taddress.getText());
-            Bank.ar.addUser(client);
-            JOptionPane.showMessageDialog(null, Bank.ar.getUser(Bank.ar.getSize() - 1).toString());
+                    temail.getText(), n, tpassword.getText(), taddress.getText(),tDot.getDate());
+            Bank.car.addUser(client);
+            JOptionPane.showMessageDialog(null, Bank.car.getUser(Bank.car.getSize() - 1).toString());
             this.setVisible(false);
-            Bank bank = new Bank(Bank.ar);
-            bank.setVisible(false);
+            Bank bank = new Bank(Bank.ar,Bank.car);
+            bank.setVisible(true);
 
         }
 
@@ -188,7 +186,7 @@ public class Sign_Up extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here
         setVisible(false);
-        new Bank(Bank.ar).setVisible(true);
+        new Bank(Bank.ar,Bank.car).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -229,13 +227,13 @@ public class Sign_Up extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private com.toedter.calendar.JDateChooser tDot;
     private javax.swing.JTextField taddress;
     private javax.swing.JTextField temail;
     private javax.swing.JTextField tname;

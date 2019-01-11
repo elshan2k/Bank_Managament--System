@@ -121,18 +121,24 @@ public class Sign_In extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        
         int id = Integer.parseInt(sID.getText());
+        
 
         if (Bank.ar.logInCheck(id, sPassword.getText())) {
-
+            if(id<=1999){
+                  setVisible(false);
+                  new AdminPanel().setVisible(true);
+            }else{
+                
+             
             Bank.ar.setIndex(id);
             ClientGUI clientGUI = new ClientGUI(Bank.ar.getIndex());
             JOptionPane.showMessageDialog(null, "You successfully logged");
             setVisible(false);
 
             clientGUI.setVisible(true);
-
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Not Valid");
         }

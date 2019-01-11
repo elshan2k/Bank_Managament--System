@@ -18,7 +18,9 @@ public class Admin extends User{
     }
 
     public Admin() {
-    }
+    } /*
+        block
+    */
 
     
     

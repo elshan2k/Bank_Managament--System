@@ -5,30 +5,20 @@
  */
 package GUI_Bank;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
-public class Bank extends javax.swing.JFrame {
-    public static UserArray ar=new UserArray();
-    public static ConfirmationArray car = new ConfirmationArray();
-   
-    
+public class AdminPanel extends javax.swing.JFrame {
+
     /**
-     * Creates new form Bank
+     * Creates new form AdminPanel
      */
-    public Bank(UserArray ar, ConfirmationArray car) {
+    public AdminPanel() {
         initComponents();
-        this.ar=ar;
-        this.car=car;
     }
-    
-    public Bank(UserArray ar){
-        initComponents();
-        this.ar=ar;
-    }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,22 +32,31 @@ public class Bank extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("WELCOME");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Admin Panel");
 
-        jButton1.setText("Sign In");
+        jButton1.setText("Confirmation list");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Sign Up");
+        jButton2.setText("User List");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Log Out");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -66,48 +65,59 @@ public class Bank extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton1)
+                .addGap(55, 55, 55)
+                .addComponent(jButton2)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(27, 27, 27)
-                .addComponent(jButton2)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(jButton3)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       /* this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.setVisible(false);*/
-        Sign_Up signup = new Sign_Up();
-        setVisible(false);
-        signup.setVisible(true);
-       // this.setVisible(false);
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Do you really want to log out?", null, JOptionPane.YES_NO_OPTION);
+        if (dialogButton == JOptionPane.YES_OPTION) {
+
+            JOptionPane.showMessageDialog(null, "You Successfully logged out");
+            setVisible(false);
+            new Bank(Bank.ar).setVisible(true);
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Sign_In signin = new Sign_In();
         setVisible(false);
-        
-        signin.setVisible(true);
-      //  this.setVisible(false);
+        new ConfirmGUI().setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,29 +136,20 @@ public class Bank extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                User u1=new Client("admin","admin","aa",1000,"1");
-                User u2=new Client("Murad","Alizadeh","aa",2000,"2");
-                User u3=new Client("Elvin","Ziyali","aa",3000,"3");
-                User u4=new Client("Elshan","Qadimov","aa",2001,"2");
-                
-                Bank.ar.addUser(u1);
-                Bank.ar.addUser(u2);
-                Bank.ar.addUser(u3);
-                Bank.ar.addUser(u4);
-                new Bank(ar,car).setVisible(true);
+                new AdminPanel().setVisible(true);
             }
         });
     }
@@ -156,6 +157,7 @@ public class Bank extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

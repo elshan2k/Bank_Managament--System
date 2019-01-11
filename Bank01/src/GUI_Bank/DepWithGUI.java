@@ -33,6 +33,8 @@ public class DepWithGUI extends javax.swing.JFrame {
         userwishmoney = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        labelBalance = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,29 +58,54 @@ public class DepWithGUI extends javax.swing.JFrame {
             }
         });
 
+        labelBalance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+
+        jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userwishmoney)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userwishmoney)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(labelBalance))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jButton3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userwishmoney, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(labelBalance)
                 .addGap(18, 18, 18)
+                .addComponent(userwishmoney, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -91,6 +118,8 @@ public class DepWithGUI extends javax.swing.JFrame {
         if (Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance()>=money) {
             Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
             ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+             Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() ,money, "Withdrawed from ", -1);
+            labelBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
             int result = JOptionPane.showConfirmDialog(null,
                 "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.NO_OPTION) {
@@ -110,11 +139,14 @@ public class DepWithGUI extends javax.swing.JFrame {
         Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() + money);
         System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
         ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+        Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() ,money, "Deposited to", -1);
+        labelBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
         int result = JOptionPane.showConfirmDialog(null,
                 "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
                 
         if (result == JOptionPane.NO_OPTION) {
             setVisible(false);
+             new ClientGUI(Bank.ar.getIndex()).setVisible(true);
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -122,6 +154,13 @@ public class DepWithGUI extends javax.swing.JFrame {
     private void userwishmoneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userwishmoneyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userwishmoneyActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new ClientGUI(Bank.ar.getIndex()).setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,6 +200,8 @@ public class DepWithGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    public static javax.swing.JLabel labelBalance;
     private javax.swing.JTextField userwishmoney;
     // End of variables declaration//GEN-END:variables
 }
