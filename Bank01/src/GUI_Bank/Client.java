@@ -6,6 +6,7 @@
 package GUI_Bank;
 
 import com.toedter.calendar.JDateChooser;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ public class Client extends User{
     
     
     
-    public Client(String name, String surname, String email, int id, String password,String address, Date dot) {
+    public Client(String name, String surname, String email, int id, String password,String address, String dot) {
         super(name, surname, email, id, password, address, dot);
     }
     

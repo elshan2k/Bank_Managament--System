@@ -25,7 +25,7 @@ public class User {
     protected String password;
     protected double balance=0.0;
     protected String address;
-    protected Date dot;
+    protected String dot;
     protected ArrayList<String> historyList = new ArrayList();
     protected boolean isBlocked = false;
 
@@ -44,7 +44,7 @@ public class User {
         this.address = address;
         setPassword(password);
     }
-     public User(String name, String surname, String email, int id, String password,String address,Date dot) {
+     public User(String name, String surname, String email, int id, String password,String address,String dot) {
         this.email=email;
         this.name = name;
         this.surname = surname;  
@@ -106,11 +106,11 @@ public class User {
         return id;
     }
 
-    public Date getDot() {
+    public String getDot() {
         return dot;
     }
 
-    public void setDot(Date dot) {
+    public void setDot(String dot) {
         this.dot = dot;
     }
 
