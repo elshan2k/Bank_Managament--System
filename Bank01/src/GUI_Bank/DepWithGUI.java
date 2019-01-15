@@ -114,40 +114,58 @@ public class DepWithGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try {
         double money = Double.parseDouble(userwishmoney.getText());
-        if (Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance()>=money) {
+        if(money<=0) {
+            JOptionPane.showMessageDialog(null, "Please enter valid number");
+        } else {
+        if (Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() >= money) {
             Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
-            ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-             Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() ,money, "Withdrawed from ", -1);
-            labelBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+            ClientGUI.balanceLabel.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+            Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money, "Withdrawed from ", -1);
+            labelBalance.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
             int result = JOptionPane.showConfirmDialog(null,
-                "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.NO_OPTION) {
-            setVisible(false);
+                    "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.NO_OPTION) {
+                setVisible(false);
 
-        }
+            }
         } else {
             JOptionPane.showMessageDialog(null, "You do not have enough amount of money on your balance");
             userwishmoney.setText("");
+        }}
+         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter valid number");
+
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        double money = Double.parseDouble(userwishmoney.getText());
-        Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() + money);
-        System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-        ClientGUI.balanceLabel.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-        Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() ,money, "Deposited to", -1);
-        labelBalance.setText("Balance: "+Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-        int result = JOptionPane.showConfirmDialog(null,
-                "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
-                
-        if (result == JOptionPane.NO_OPTION) {
-            setVisible(false);
-             new ClientGUI(Bank.ar.getIndex()).setVisible(true);
-            
+        try {
+            double money = Double.parseDouble(userwishmoney.getText()); //gets money
+            if (money <= 0) {
+                JOptionPane.showMessageDialog(null, "Please enter valid number");
+            } else {
+                Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() + money); //sets new balance
+
+                ClientGUI.balanceLabel.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance()); //refresh balance in client interface
+                Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money,
+                        "Deposited to", -1); // adds  transaction to history
+                labelBalance.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());// shows 
+                int result = JOptionPane.showConfirmDialog(null,
+                        "Process is successful. Are you sure you wish to continue?", null, JOptionPane.YES_NO_OPTION);
+
+                if (result == JOptionPane.NO_OPTION) {
+                    setVisible(false);
+                    new ClientGUI(Bank.ar.getIndex()).setVisible(true);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter valid number");
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -159,7 +177,7 @@ public class DepWithGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         new ClientGUI(Bank.ar.getIndex()).setVisible(true);
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

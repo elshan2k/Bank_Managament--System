@@ -126,31 +126,36 @@ public class Sign_In extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try {
+            int id = Integer.parseInt(sID.getText());
 
-        int id = Integer.parseInt(sID.getText());
+            if (Bank.ar.logInCheck(id, sPassword.getText())) {
+                if (Bank.ar.getUser(Bank.ar.getIndexByID(id)).isIsBlocked()) {
+                    JOptionPane.showMessageDialog(null, "You are blocked!");
+                    sID.setText("");
+                    sPassword.setText("");
 
-        if (Bank.ar.logInCheck(id, sPassword.getText())) {
-            if (Bank.ar.getUser(Bank.ar.getIndexByID(id)).isIsBlocked()) {
-                JOptionPane.showMessageDialog(null, "You are blocked!");
-                sID.setText("");
-                sPassword.setText("");
-
-            } else {
-                if (id <= 1999) {
-                    setVisible(false);
-                    new AdminPanel().setVisible(true);
                 } else {
+                    if (id <= 1999) {
+                        setVisible(false);
+                        new AdminPanel().setVisible(true);
+                    } else {
 
-                    Bank.ar.setIndex(id);
-                    ClientGUI clientGUI = new ClientGUI(Bank.ar.getIndex());
-                    JOptionPane.showMessageDialog(null, "You successfully logged");
-                    setVisible(false);
+                        Bank.ar.setIndex(id);
+                        ClientGUI clientGUI = new ClientGUI(Bank.ar.getIndex());
+                        JOptionPane.showMessageDialog(null, "You successfully logged");
+                        setVisible(false);
 
-                    clientGUI.setVisible(true);
+                        clientGUI.setVisible(true);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Your ID or password is not correct");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Not Valid");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter valid id number");
+            sID.setText("");
+            sPassword.setText("");
         }
 
 

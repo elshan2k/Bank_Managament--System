@@ -111,47 +111,55 @@ public class SendMoney extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(recID.getText());
-        double money = Double.parseDouble(recMoney.getText());
-        int recIndex = Bank.ar.getIndexByID(id);
-        if (!Bank.ar.idCheck(id) && Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() >= money) {
-            if(Bank.ar.getIndex()==recIndex){
-                JOptionPane.showMessageDialog(null, "You cannot transfer money to yourself!");
-            }else{
-            if (Bank.ar.getUser(recIndex).isIsBlocked() == true) {
-                JOptionPane.showMessageDialog(null, "This account is blocked");
+        try {
+            int id = Integer.parseInt(recID.getText());
+            double money = Double.parseDouble(recMoney.getText());
+            if (money <= 0) {
+                JOptionPane.showMessageDialog(null, "Please enter valid money");
             } else {
+                int recIndex = Bank.ar.getIndexByID(id);
+                if (!Bank.ar.idCheck(id) && Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() >= money) {
+                    if (Bank.ar.getIndex() == recIndex) {
+                        JOptionPane.showMessageDialog(null, "You cannot transfer money to yourself!");
+                    } else {
+                        if (Bank.ar.getUser(recIndex).isIsBlocked() == true) {
+                            JOptionPane.showMessageDialog(null, "This account is blocked");
+                        } else {
 
-                int result = JOptionPane.showConfirmDialog(null,
-                        "Do you really want to send " + "$" + money + " to "
-                        + Bank.ar.userlist.get(recIndex).getName()
-                        + " "
-                        + Bank.ar.userlist.get(recIndex).getSurname()
-                        + "(" + id + ")?", null, JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
-                    Bank.ar.userlist.get(recIndex).setBalance(Bank.ar.userlist.get(recIndex).balance + money);
-                    System.out.println(Bank.ar.userlist.get(recIndex).getBalance());
-                    System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-                    ClientGUI.balanceLabel.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-                    Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money, "", id);
-                    labelSendBalance.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
-                    Bank.ar.getUser(recIndex).getTransaction(Bank.ar.getUser(recIndex).getBalance(), money, "", Bank.ar.getUser(Bank.ar.getIndex()).getId());
+                            int result = JOptionPane.showConfirmDialog(null,
+                                    "Do you really want to send " + "$" + money + " to "
+                                    + Bank.ar.userlist.get(recIndex).getName()
+                                    + " "
+                                    + Bank.ar.userlist.get(recIndex).getSurname()
+                                    + "(" + id + ")?", null, JOptionPane.YES_NO_OPTION);
+                            if (result == JOptionPane.YES_OPTION) {
+                                Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
+                                Bank.ar.userlist.get(recIndex).setBalance(Bank.ar.userlist.get(recIndex).balance + money);
+                                System.out.println(Bank.ar.userlist.get(recIndex).getBalance());
+                                System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                                ClientGUI.balanceLabel.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                                Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money, "", id);
+                                labelSendBalance.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
+                                Bank.ar.getUser(recIndex).getTransaction(Bank.ar.getUser(recIndex).getBalance(), money, "", Bank.ar.getUser(Bank.ar.getIndex()).getId());
 
-                    JOptionPane.showMessageDialog(null, "Proccess is Successful");
+                                JOptionPane.showMessageDialog(null, "Proccess is Successful");
 
-                } else if (result == JOptionPane.NO_OPTION) {
+                            } else if (result == JOptionPane.NO_OPTION) {
+                                recID.setText("");
+                                recMoney.setText("");
+                            }
+                        }
+                    }
+                } else if (Bank.ar.idCheck(id)) {
+                    JOptionPane.showMessageDialog(null, "Receiver's ID is not correct");
                     recID.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "You do not have enough amount of money on your balance");
                     recMoney.setText("");
                 }
             }
-        }
-        }else if (Bank.ar.idCheck(id)) {
-            JOptionPane.showMessageDialog(null, "Receiver's ID is not correct");
-            recID.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, "You do not have enough amount of money on your balance");
-            recMoney.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Your ID or entered amount of money is not correct");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
