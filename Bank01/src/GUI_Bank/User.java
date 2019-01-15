@@ -27,6 +27,7 @@ public class User {
     protected String address;
     protected Date dot;
     protected ArrayList<String> historyList = new ArrayList();
+    protected boolean isBlocked = false;
 
     public User(String name, String surname, String email, int id, String password) {
         this.email=email;
@@ -52,6 +53,17 @@ public class User {
         this.dot = dot;
         setPassword(password);
     }
+     
+     public User(String name, String surname, String email, int id, String password,boolean isBlocked) {
+        this.email=email;
+        this.name = name;
+        this.surname = surname;  
+        this.id = id;
+        setPassword(password);
+        this.isBlocked=isBlocked;
+    }
+     
+     
 
     public User() {
         
@@ -124,6 +136,15 @@ public class User {
         this.address = address;
     }
 
+    public boolean isIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+
+    
     @Override
     public String toString() {
         return "User{" + "name=" + name + ", surname=" + surname + ", email=" + email + ", id=" + id + ", password=" + password + ", balance=" + balance + ", address=" + address + '}';

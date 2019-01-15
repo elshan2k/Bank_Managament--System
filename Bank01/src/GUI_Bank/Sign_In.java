@@ -16,7 +16,6 @@ public class Sign_In extends javax.swing.JFrame {
     /**
      * Creates new form Sign_In
      */
-
     public Sign_In() {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,6 +40,12 @@ public class Sign_In extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        sID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sIDActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("ID:");
 
@@ -121,27 +126,34 @@ public class Sign_In extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         int id = Integer.parseInt(sID.getText());
-        
 
         if (Bank.ar.logInCheck(id, sPassword.getText())) {
-            if(id<=1999){
-                  setVisible(false);
-                  new AdminPanel().setVisible(true);
-            }else{
-                
-             
-            Bank.ar.setIndex(id);
-            ClientGUI clientGUI = new ClientGUI(Bank.ar.getIndex());
-            JOptionPane.showMessageDialog(null, "You successfully logged");
-            setVisible(false);
+            if (Bank.ar.getUser(Bank.ar.getIndexByID(id)).isIsBlocked()) {
+                JOptionPane.showMessageDialog(null, "You are blocked!");
+                sID.setText("");
+                sPassword.setText("");
 
-            clientGUI.setVisible(true);
+            } else {
+                if (id <= 1999) {
+                    setVisible(false);
+                    new AdminPanel().setVisible(true);
+                } else {
+
+                    Bank.ar.setIndex(id);
+                    ClientGUI clientGUI = new ClientGUI(Bank.ar.getIndex());
+                    JOptionPane.showMessageDialog(null, "You successfully logged");
+                    setVisible(false);
+
+                    clientGUI.setVisible(true);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Not Valid");
         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void sPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sPasswordActionPerformed
@@ -160,6 +172,10 @@ public class Sign_In extends javax.swing.JFrame {
         setVisible(false);
         new Bank(Bank.ar).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void sIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sIDActionPerformed
 
     /**
      * @param args the command line arguments

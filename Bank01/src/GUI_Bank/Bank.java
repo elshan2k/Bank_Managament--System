@@ -139,10 +139,11 @@ public class Bank extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                User u1=new Client("admin","admin","aa",1000,"1");
-                User u2=new Client("Murad","Alizadeh","aa",2000,"2");
-                User u3=new Client("Elvin","Ziyali","aa",3000,"3");
-                User u4=new Client("Elshan","Qadimov","aa",2001,"2");
+                User u1=new Client("admin","admin","aa",1000,"1",false);
+                User u2=new Client("Murad","Alizadeh","aa",2000,"2",false);
+                User u3=new Client("Elvin","Ziyali","aa",3000,"3",true);
+                User u4=new Client("Elshan","Qadimov","aa",2001,"2",true);
+               
                 
                 Bank.ar.addUser(u1);
                 Bank.ar.addUser(u2);

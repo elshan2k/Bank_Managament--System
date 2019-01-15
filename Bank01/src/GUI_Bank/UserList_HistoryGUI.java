@@ -5,24 +5,26 @@
  */
 package GUI_Bank;
 
+import GUI_Bank.*;
 import javax.swing.DefaultListModel;
 
 /**
  *
  * @author HP
  */
-public class HistoryGUI extends javax.swing.JFrame {
-
+public class UserList_HistoryGUI extends javax.swing.JFrame {
+    private static int index;
 
     /**
      * Creates new form HistoryGUI
      */
     private DefaultListModel<String> listModel = new DefaultListModel<>();
 
-    public HistoryGUI() {
+    public UserList_HistoryGUI(int index) {
         initComponents();
-        for (int i = 0; i < Bank.ar.getUser(Bank.ar.getIndex()).historyList.size(); i++) {
-            listModel.addElement(Bank.ar.getUser(Bank.ar.getIndex()).historyList.get(i));
+        this.index=index;
+        for (int i = 0; i < Bank.ar.getUser(this.index).historyList.size(); i++) {
+            listModel.addElement(Bank.ar.getUser(this.index).historyList.get(i));
         }
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -79,7 +81,7 @@ public class HistoryGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new ClientGUI(Bank.ar.getIndex()).setVisible(true);
+        new UserListGUI().setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -100,20 +102,21 @@ public class HistoryGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserList_HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserList_HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserList_HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserList_HistoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HistoryGUI().setVisible(true);
+                new UserList_HistoryGUI(index).setVisible(true);
             }
         });
     }
