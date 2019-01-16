@@ -50,6 +50,7 @@ public class Sign_Up extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         tDot = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -94,6 +95,9 @@ public class Sign_Up extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setText("*at least 6 characters");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,6 +115,7 @@ public class Sign_Up extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tDot, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,15 +123,15 @@ public class Sign_Up extends javax.swing.JFrame {
                                     .addComponent(temail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tpassword, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(taddress, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tDot, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7)
+                                .addGap(55, 55, 55))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(70, 70, 70))
+                        .addGap(80, 80, 80))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +150,9 @@ public class Sign_Up extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tpassword)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tpassword)
+                        .addComponent(jLabel7))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +179,8 @@ public class Sign_Up extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (tname.getText().isEmpty() || tsurname.getText().isEmpty()
-                || temail.getText().isEmpty() || tpassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fill");
+                || temail.getText().isEmpty() || tpassword.getText().isEmpty() || tpassword.getText().length()<6) {
+            JOptionPane.showMessageDialog(null, "Please fill blanks correctly");
         } else {
             do {
                 n = (int) (Math.random() * 2000 + 7999);
@@ -186,9 +193,10 @@ public class Sign_Up extends javax.swing.JFrame {
                     temail.getText(), n, tpassword.getText(), taddress.getText(), tDate);
             Bank.car.addUser(client);
             JOptionPane.showMessageDialog(null, "Your registration is waiting for admin's confirmation");
-            JOptionPane.showMessageDialog(null, "Here is your ID <<"+Bank.car.getUser(Bank.car.getSize() - 1).getId()+">>");
-            JOptionPane.showMessageDialog(null, "Please keep your ID as a secret and do not forget it or you will"
+            JOptionPane.showMessageDialog(null, "Here is your ID <<"+Bank.car.getUser(Bank.car.getSize() - 1).getId()+">> "
+                    + "Please keep your ID as a secret and do not forget it or you will"
                     + " not be able to log in to your account!!!");
+           
             this.setVisible(false);
             Bank bank = new Bank(Bank.ar, Bank.car);
             bank.setVisible(true);
@@ -252,6 +260,7 @@ public class Sign_Up extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private com.toedter.calendar.JDateChooser tDot;
     private javax.swing.JTextField taddress;
     private javax.swing.JTextField temail;

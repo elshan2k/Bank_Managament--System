@@ -142,8 +142,6 @@ public class SendMoney extends javax.swing.JFrame {
                             if (result == JOptionPane.YES_OPTION) {
                                 Bank.ar.userlist.get(Bank.ar.getIndex()).setBalance(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance() - money);
                                 Bank.ar.userlist.get(recIndex).setBalance(Bank.ar.userlist.get(recIndex).balance + money);
-                                System.out.println(Bank.ar.userlist.get(recIndex).getBalance());
-                                System.out.println(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
                                 ClientGUI.balanceLabel.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
                                 Bank.ar.getUser(Bank.ar.getIndex()).addTransaction(Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance(), money, "", id);
                                 labelSendBalance.setText("Balance: " + Bank.ar.userlist.get(Bank.ar.getIndex()).getBalance());
