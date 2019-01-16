@@ -24,7 +24,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
     public Sign_Up() {
         initComponents();
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -52,6 +52,7 @@ public class Sign_Up extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Name:");
 
@@ -71,8 +72,9 @@ public class Sign_Up extends javax.swing.JFrame {
 
         jLabel3.setText("Surname:");
 
-        jLabel4.setText("Email");
+        jLabel4.setText("Email:");
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +86,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
         jLabel6.setText("Date of birth:");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +185,10 @@ public class Sign_Up extends javax.swing.JFrame {
             User client = new Client(tname.getText(), tsurname.getText(),
                     temail.getText(), n, tpassword.getText(), taddress.getText(), tDate);
             Bank.car.addUser(client);
-            JOptionPane.showMessageDialog(null, Bank.car.getUser(Bank.car.getSize() - 1).toString());
+            JOptionPane.showMessageDialog(null, "Your registration is waiting for admin's confirmation");
+            JOptionPane.showMessageDialog(null, "Here is your ID <<"+Bank.car.getUser(Bank.car.getSize() - 1).getId()+">>");
+            JOptionPane.showMessageDialog(null, "Please keep your ID as a secret and do not forget it or you will"
+                    + " not be able to log in to your account!!!");
             this.setVisible(false);
             Bank bank = new Bank(Bank.ar, Bank.car);
             bank.setVisible(true);

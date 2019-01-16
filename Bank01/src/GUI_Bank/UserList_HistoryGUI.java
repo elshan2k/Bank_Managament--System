@@ -7,6 +7,7 @@ package GUI_Bank;
 
 import GUI_Bank.*;
 import javax.swing.DefaultListModel;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
@@ -26,7 +27,7 @@ public class UserList_HistoryGUI extends javax.swing.JFrame {
         for (int i = 0; i < Bank.ar.getUser(this.index).historyList.size(); i++) {
             listModel.addElement(Bank.ar.getUser(this.index).historyList.get(i));
         }
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
    
@@ -45,9 +46,11 @@ public class UserList_HistoryGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jScrollPane1.setViewportView(jList1);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

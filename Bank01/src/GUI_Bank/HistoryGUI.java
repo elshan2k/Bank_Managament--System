@@ -24,7 +24,7 @@ public class HistoryGUI extends javax.swing.JFrame {
         for (int i = 0; i < Bank.ar.getUser(Bank.ar.getIndex()).historyList.size(); i++) {
             listModel.addElement(Bank.ar.getUser(Bank.ar.getIndex()).historyList.get(i));
         }
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
    
@@ -43,6 +43,7 @@ public class HistoryGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jScrollPane1.setViewportView(jList1);
 
